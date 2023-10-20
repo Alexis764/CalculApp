@@ -1,5 +1,6 @@
 package com.example.calculapp.ui.credit
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -8,10 +9,12 @@ import androidx.fragment.app.Fragment
 import com.example.calculapp.R
 import com.example.calculapp.databinding.FragmentAskCreditBinding
 import com.example.calculapp.domain.credit.CalculateCredit
+import com.example.calculapp.ui.register.UserRegisterActivity
 import dagger.hilt.android.AndroidEntryPoint
 import java.text.NumberFormat
 import java.util.Currency
 
+@Suppress("DEPRECATION")
 @AndroidEntryPoint
 class AskCreditFragment : Fragment() {
 
@@ -61,7 +64,11 @@ class AskCreditFragment : Fragment() {
             setStepSizeDaysSlider(valueDays)
         }
         binding.btnRequestsCredit.setOnClickListener {
-
+            val intent = Intent(requireContext(), UserRegisterActivity::class.java)
+            startActivity(intent)
+        }
+        binding.btnBack.setOnClickListener {
+            activity?.onBackPressed()
         }
     }
 
