@@ -81,12 +81,27 @@
 
         </FrameLayout>
 
-        <TextView
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/questionWhenPay"
-            android:textColor="@color/primaryDark"
-            style="@style/basicText"/>
+            android:gravity="center_vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/questionWhenPay"
+                android:textColor="@color/primaryDark"
+                style="@style/basicText"/>
+
+            <ImageView
+                android:id="@+id/btnDaysInfo"
+                android:layout_width="18dp"
+                android:layout_height="18dp"
+                android:layout_marginStart="6dp"
+                android:src="@drawable/ic_info"
+                android:contentDescription="@string/content_imageInfo"/>
+
+        </LinearLayout>
 
         <com.google.android.material.slider.Slider
             android:id="@+id/daysSlider"

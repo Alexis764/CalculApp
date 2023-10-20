@@ -110,6 +110,7 @@ class AskCreditFragment : Fragment() {
 
     //Function to init tooltips text for info
     private fun setTooltipsText() {
+        binding.btnDaysInfo.tooltipText = getString(R.string.questionWhenPayTooltip)
         binding.btnInterest.tooltipText = getString(R.string.interestTooltip)
         binding.btnGuarantee.tooltipText = getString(R.string.guaranteeTooltip)
         binding.btnGuaranteeDiscount.tooltipText = getString(R.string.guaranteeDiscountTooltip)

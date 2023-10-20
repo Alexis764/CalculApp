@@ -30,6 +30,7 @@
     <string name="finishMoney">$1 000 000</string>
 
     <string name="questionWhenPay">¿Cuando puedes pagarlo?</string>
+    <string name="questionWhenPayTooltip">Tu primer plazo puede ser de hasta 30 días pero puedes solicitar ampliar el plazo 30 días más en la fecha de vencimiento de tu crédito.</string>
     <string name="initDay">5 Días</string>
     <string name="finishDay">150 Días</string>
 
@@ -61,5 +62,22 @@
     <string name="total">Total</string>
     <string name="content_imageInfo">Info image</string>
     <string name="negativeNumber">-%s</string>
+
+    <!--UserRegisterActivity-->
+    <string name="btnLogin">¿Ya eres cliente CalculApp?</string>
+
+    <string name="amountToRequest">Monto a solicitar</string>
+    <string name="payDate">Fecha de pago</string>
+    <string name="edit">Editar</string>
+    <string name="content_edit_image">Image edit</string>
+
+    <string name="enterData">!Ingresa tus datos</string>
+    <string name="howIdentity">como aparecen en tu cedula</string>
+
+    <string name="content_questionScroll">Question ScrollView</string>
+    <string name="questionFirstName">Primer nombre</string>
+    <string name="questionSecondName">Segundo nombre (Campo opcional)</string>
+    <string name="questionLastName">Primer apellido</string>
+    <string name="questionSecondLastName">Segundo apellido (Campo opcional)</string>
 
 </resources>
