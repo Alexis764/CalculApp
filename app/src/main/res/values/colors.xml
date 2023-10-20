@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+
+    <!--Color palette-->
+    <color name="primary">#F2F3F6</color>
+    <color name="primaryDark">#616366</color>
+    <color name="secondary">#0687BA</color>
+
+    <color name="accent">#DA0916</color>
+    <color name="accentWhite">#FFFFFFFF</color>
+
+    <color name="text">#232427</color>
+    <color name="borderInput">#62C6C0</color>
+
+    <color name="red_splash">#80DA0916</color>
+</resources>

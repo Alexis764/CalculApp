@@ -1,0 +1,65 @@
+<resources>
+    <!--Global-->
+    <string name="app_name">CalculApp</string>
+    <string name="logo">Logo image</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <!--LoadActivity-->
+    <string name="content_background_girl">Girl image</string>
+    <string name="content_security">Security image</string>
+    <string name="securityText">100% segura</string>
+    <string name="copyrightText">Copyright @ 2023 calculapp todos los derechos reservados</string>
+    <string name="secondsText">%xs</string>
+
+    <!--AboutActivity-->
+    <string name="content_aboutImage">About image</string>
+    <string name="content_arrowUpImage">Arrow up image</string>
+    <string name="appWelcome">Bienvenido a CalculApp</string>
+    <string name="appDescription">¡Proporcionando cosas esenciales para la seguridad de sus créditos!</string>
+    <string name="firstAppFeature">Recibe dinero</string>
+    <string name="secondAppFeature">Paga la deuda</string>
+    <string name="thirdAppFeature">Explora ofertas interesantes</string>
+    <string name="buttonNext">Siguiente</string>
+
+    <!--AskCreditFragment-->
+    <string name="content_diagonalArrow">Back arrow image</string>
+    <string name="titleAskCredit">Calcula tu credito online</string>
+
+    <string name="questionHowMuchMoney">¿Cuanto dinero necesitas?</string>
+    <string name="initMoney">$100 000</string>
+    <string name="finishMoney">$1 000 000</string>
+
+    <string name="questionWhenPay">¿Cuando puedes pagarlo?</string>
+    <string name="initDay">5 Días</string>
+    <string name="finishDay">150 Días</string>
+
+    <string name="totalPay">Total a pagar</string>
+    <string name="creditDescription">Este valor corresponde a una simulación de tu crédito según los datos seleccionados por ti.</string>
+    <string name="requestsCredit">Pide tu credito</string>
+
+    <string name="requestedAmount">Monto solicitado</string>
+
+    <string name="interest">Intereses</string>
+    <string name="interestComplement">(35% EA)</string>
+    <string name="interestTooltip">El interés corriente aplicado a tu crédito es del 35%EA (Efectivo anual) sobre el capital adeudado. Esta tasa es inferior a la tasa de usura establecida por las autoridades nacionales para Septiembre 2023: 42,05% EA  Este interés se calcula diariamente por el plazo que escojas para pagar tu crédito.</string>
+
+    <string name="guarantee">Aval</string>
+    <string name="guaranteeComplement">(opcional)</string>
+    <string name="guaranteeTooltip">Para el otorgamiento del crédito, debes cumplir con el requisito de constitución de un aval que garantice el cumplimiento del pago total o parcial de tu crédito. Si lo deseas, puedes contratarlo con nuestros proveedores aliados al momento de la solicitud del crédito.</string>
+
+    <string name="guaranteeDiscount">Descuento Aval</string>
+    <string name="guaranteeDiscountTooltip">En caso que desees optar por el aval opcional ofrecido por RapiCredit, podrás acceder a descuentos en su costo. Por tu buen comportamiento en el pago de tu crédito, podrás hacer efectivo descuentos en el costo total del aval.</string>
+
+    <string name="electronicSignature">Firma electrónica</string>
+    <string name="electronicSignatureComplement">(opcional)</string>
+    <string name="electronicSignatureTooltip">El pago del  servicio de firma electrónica del crédito es opcional y te permite instrumentar la firma del crédito 100% en línea, ahorrándote tiempo y dinero. Este costo es realizado únicamente al momento de utilizar nuestros servicios, a través  de un cobro de $130.500, el cual podrá tener un descuento cuando realices un pago oportuno de tu crédito.</string>
+
+    <string name="discount">Descuento</string>
+    <string name="discountComplement">(por inclusión financiera)</string>
+    <string name="discountTooltip">El uso de nuestra plataforma es completamente opcional, sin embargo, si deseas usarla, podrás generar descuentos por inclusión financiera por tu buen comportamiento en el pago de tus obligaciones financieras con RapiCredit. Así, RapiCredit quiere promover el uso de herramientas tecnológicas que ofrezcan productos y servicios que promuevan la inclusión financiera y el acceso al crédito de las personas.</string>
+
+    <string name="total">Total</string>
+    <string name="content_imageInfo">Info image</string>
+    <string name="negativeNumber">-%s</string>
+
+</resources>

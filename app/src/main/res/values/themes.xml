@@ -1,0 +1,45 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- Base application theme. -->
+    <style name="Base.Theme.CalculApp" parent="Theme.Material3.DayNight.NoActionBar">
+        <item name="android:statusBarColor">@color/primaryDark</item>
+    </style>
+
+    <style name="Theme.CalculApp" parent="Base.Theme.CalculApp" />
+
+
+    <!--Text-->
+    <style name="basicText" parent="Theme.CalculApp">
+        <item name="fontFamily">@font/gabarito</item>
+        <item name="android:textColor">@color/text</item>
+        <item name="android:textSize">17sp</item>
+    </style>
+
+    <style name="titleText" parent="basicText">
+        <item name="android:textStyle">bold</item>
+        <item name="android:textSize">24sp</item>
+    </style>
+
+    <!--Slider-->
+    <style name="slider">
+        <item name="trackHeight">16dp</item>
+        <item name="trackColorActive">@color/accent</item>
+        <item name="trackColorInactive">@color/accentWhite</item>
+        <item name="thumbRadius">15dp</item>
+        <item name="thumbColor">@color/primary</item>
+        <item name="tickVisible">false</item>
+        <item name="labelBehavior">visible</item>
+        <item name="labelStyle">@style/slider.Tooltip</item>
+    </style>
+
+    <style name="slider.Tooltip" parent="Widget.Material3.Tooltip">
+        <item name="backgroundTint">@color/primaryDark</item>
+        <item name="android:textAppearance">@style/slider.Tooltip.textAppearance</item>
+        <item name="android:textColor">@color/white</item>
+    </style>
+
+    <style name="slider.Tooltip.textAppearance" parent="TextAppearance.MaterialComponents.Tooltip">
+        <item name="fontFamily">@font/gabarito</item>
+        <item name="android:textSize">16sp</item>
+    </style>
+
+</resources>
