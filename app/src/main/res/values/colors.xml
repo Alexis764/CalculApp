@@ -15,4 +15,5 @@
     <color name="borderInput">#62C6C0</color>
 
     <color name="red_splash">#80DA0916</color>
+    <color name="buttonDisable">#80DCD5D5</color>
 </resources>

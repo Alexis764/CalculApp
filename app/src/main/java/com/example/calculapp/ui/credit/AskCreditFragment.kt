@@ -26,6 +26,13 @@ class AskCreditFragment : Fragment() {
     private lateinit var moneyFormat: NumberFormat
     private val calculateCredit = CalculateCredit()
 
+    //Constants
+    companion object {
+        //Constants to extras for next screen
+        const val EXT_AMOUNT_REQUESTED = "extAmountRequest"
+        const val EXT_DAYS = "extDays"
+    }
+
 
     //Function when the view is created
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -64,8 +71,7 @@ class AskCreditFragment : Fragment() {
             setStepSizeDaysSlider(valueDays)
         }
         binding.btnRequestsCredit.setOnClickListener {
-            val intent = Intent(requireContext(), UserRegisterActivity::class.java)
-            startActivity(intent)
+            startUserRegisterActivity()
         }
         binding.btnBack.setOnClickListener {
             activity?.onBackPressed()
@@ -100,11 +106,24 @@ class AskCreditFragment : Fragment() {
         }
     }
 
+    //Function to init UserRegisterActivity sending the necessary extras
+    private fun startUserRegisterActivity() {
+        val intent = Intent(requireContext(), UserRegisterActivity::class.java)
+        intent.putExtra(EXT_AMOUNT_REQUESTED, binding.quantitySlider.value.toInt())
+        intent.putExtra(EXT_DAYS, binding.daysSlider.value.toInt())
+        startActivity(intent)
+        activity?.finish()
+    }
+
 
     //Function to init sliders first values
     private fun setFirstValues() {
-        binding.quantitySlider.value = 250000f
-        binding.daysSlider.value = 10f
+        val firstMoneyValue = activity?.intent?.extras?.getInt(EXT_AMOUNT_REQUESTED)?.toFloat() ?: 250000f
+        binding.quantitySlider.value = firstMoneyValue
+
+        val firstDayValue = activity?.intent?.extras?.getInt(EXT_DAYS)?.toFloat() ?: 10f
+        if (firstMoneyValue > 30) {setStepSizeDaysSlider(firstDayValue)}
+        binding.daysSlider.value = firstDayValue
     }
 
 

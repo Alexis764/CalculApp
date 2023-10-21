@@ -2,6 +2,7 @@
     <!-- Base application theme. -->
     <style name="Base.Theme.CalculApp" parent="Theme.Material3.DayNight.NoActionBar">
         <item name="android:statusBarColor">@color/primaryDark</item>
+        <item name="checkboxStyle">@style/Widget.App.CheckBox</item>
     </style>
 
     <style name="Theme.CalculApp" parent="Base.Theme.CalculApp" />
@@ -53,13 +54,26 @@
         <item name="boxStrokeColor">@color/borderInput</item>
         <item name="startIconTint">@color/borderInput</item>
         <item name="hintTextColor">@color/primaryDark</item>
+        <item name="android:textColorHint">@color/primaryDark</item>
         <item name="android:textAppearance">@font/gabarito</item>
         <item name="android:layout_marginVertical">8dp</item>
     </style>
 
     <style name="basicTextInputEditText">
+        <item name="android:textCursorDrawable">@null</item>
         <item name="android:textColor">@color/text</item>
         <item name="android:textSize">16sp</item>
+    </style>
+    
+    
+    <!--Checkbox-->
+    <style name="Widget.App.CheckBox" parent="Widget.Material3.CompoundButton.CheckBox">
+        <item name="materialThemeOverlay">@style/ThemeOverlay.App.Checkbox</item>
+    </style>
+
+    <style name="ThemeOverlay.App.Checkbox" parent="">
+        <item name="colorPrimary">@color/secondary</item>
+        <item name="colorOnPrimary">@color/accentWhite</item>
     </style>
 
 

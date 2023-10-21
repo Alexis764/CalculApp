@@ -79,5 +79,16 @@
     <string name="questionSecondName">Segundo nombre (Campo opcional)</string>
     <string name="questionLastName">Primer apellido</string>
     <string name="questionSecondLastName">Segundo apellido (Campo opcional)</string>
+    <string name="questionTypeDocument">Tipo de documento</string>
+    <string name="questionIdentityNumber">Numero de identificacion</string>
+    <string name="questionEmail">Correo electronico</string>
+    <string name="questionRepeatEmail">Repetir correo electronico</string>
+    <string name="questionPhoneNumber">Telefono celular</string>
+    <string name="questionPassword">Crea una contraseña</string>
+    <string name="questionRepeatPassword">Repetir contraseña</string>
+
+    <string name="checkTerms">Acepto los terminos y condiciones</string>
+    <string name="checkProtectionPolicy">Acepto la politica para la proteccion y tratamiento de datos personales</string>
+    <string name="btnContinueText">Continuar</string>
 
 </resources>

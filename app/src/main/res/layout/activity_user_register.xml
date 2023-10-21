@@ -194,6 +194,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
+            android:gravity="center_horizontal"
             android:layout_marginHorizontal="20dp"
             android:layout_marginBottom="20dp">
 
@@ -208,6 +209,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center"
+                    android:inputType="textPersonName"
+                    android:maxLength="15"
                     style="@style/basicTextInputEditText"/>
 
             </com.google.android.material.textfield.TextInputLayout>
@@ -223,6 +226,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center"
+                    android:inputType="textPersonName"
+                    android:maxLength="15"
                     style="@style/basicTextInputEditText"/>
 
             </com.google.android.material.textfield.TextInputLayout>
@@ -238,6 +243,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center"
+                    android:inputType="textPersonName"
+                    android:maxLength="15"
                     style="@style/basicTextInputEditText"/>
 
             </com.google.android.material.textfield.TextInputLayout>
@@ -253,6 +260,35 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center"
+                    android:inputType="textPersonName"
+                    android:maxLength="15"
+                    style="@style/basicTextInputEditText"/>
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/tilTypeDocument"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="8dp"
+                android:hint="@string/questionTypeDocument"
+                app:boxCornerRadiusBottomEnd="50dp"
+                app:boxCornerRadiusBottomStart="50dp"
+                app:boxCornerRadiusTopEnd="50dp"
+                app:boxCornerRadiusTopStart="50dp"
+                app:boxStrokeColor="@color/borderInput"
+                app:hintTextColor="@color/primaryDark"
+                android:textColorHint="@color/primaryDark"
+                app:boxBackgroundColor="@color/primary"
+                app:endIconTint="@color/primaryDark"
+                style="@style/Widget.Material3.TextInputLayout.OutlinedBox.ExposedDropdownMenu">
+
+                <AutoCompleteTextView
+                    android:id="@+id/actvTypeDocument"
+                    android:layout_width="match_parent"
+                    android:layout_height="60dp"
+                    android:gravity="center"
+                    android:inputType="none"
                     style="@style/basicTextInputEditText"/>
 
             </com.google.android.material.textfield.TextInputLayout>
@@ -260,16 +296,139 @@
             <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="@string/questionSecondLastName"
-                style="@style/Widget.Material3.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
-                android:theme="@style/basicTextInputLayout">
+                android:hint="@string/questionIdentityNumber"
+                style="@style/basicTextInputLayout">
 
-                <AutoCompleteTextView
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/tietIdentityNumber"
                     android:layout_width="match_parent"
-                    android:layout_height="60dp"
-                    android:inputType="none"/>
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:inputType="number"
+                    android:maxLength="10"
+                    style="@style/basicTextInputEditText"/>
 
             </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/questionEmail"
+                app:startIconDrawable="@drawable/ic_email"
+                app:endIconMode="password_toggle"
+                app:endIconTint="@color/accent"
+                style="@style/basicTextInputLayout">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/tietEmail"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:inputType="textEmailAddress"
+                    style="@style/basicTextInputEditText"/>
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/questionRepeatEmail"
+                style="@style/basicTextInputLayout">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/tietRepeatEmail"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:inputType="textEmailAddress"
+                    style="@style/basicTextInputEditText"/>
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/questionPhoneNumber"
+                app:startIconDrawable="@drawable/ic_phone"
+                style="@style/basicTextInputLayout">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/tietPhoneNumber"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:inputType="number"
+                    android:maxLength="10"
+                    style="@style/basicTextInputEditText"/>
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/questionPassword"
+                app:startIconDrawable="@drawable/ic_lock"
+                app:endIconMode="password_toggle"
+                app:endIconTint="@color/accent"
+                style="@style/basicTextInputLayout">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/tietPassword"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:inputType="textPassword"
+                    style="@style/basicTextInputEditText"/>
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/questionRepeatPassword"
+                app:startIconDrawable="@drawable/ic_double_lock"
+                app:endIconMode="password_toggle"
+                app:endIconTint="@color/accent"
+                style="@style/basicTextInputLayout">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/tietRepeatPassword"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:inputType="textPassword"
+                    style="@style/basicTextInputEditText"/>
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <CheckBox
+                android:id="@+id/cbTerms"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/checkTerms"
+                android:textColor="@color/secondary"
+                android:gravity="center"
+                style="@style/basicText"/>
+
+            <CheckBox
+                android:id="@+id/cbProtectionPolicy"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/checkProtectionPolicy"
+                android:textColor="@color/secondary"
+                android:gravity="center"
+                style="@style/basicText"/>
+
+            <Button
+                android:id="@+id/btnContinue"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:layout_marginVertical="8dp"
+                android:backgroundTint="@color/buttonDisable"
+                android:text="@string/btnContinueText"
+                android:textColor="@color/white"
+                android:enabled="false"
+                style="@style/titleText"/>
 
         </LinearLayout>
 

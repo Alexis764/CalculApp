@@ -1,5 +1,7 @@
 package com.example.calculapp.domain.credit
 
+import java.time.LocalDate
+
 class CalculateCredit {
 
     //Constants
@@ -37,6 +39,7 @@ class CalculateCredit {
         return CalculatedCreditModel(
             amountRequested = valueMoney,
             daysRequested = valueDays,
+            creditDate = LocalDate.now(),
             interest = interest,
             endorsement = endorsement,
             endorsementDiscount = endorsementDiscount,
