@@ -1,9 +1,10 @@
 package com.example.calculapp.ui.login
 
-import androidx.appcompat.app.AppCompatActivity
+import android.content.Intent
 import android.os.Bundle
-import com.example.calculapp.R
+import androidx.appcompat.app.AppCompatActivity
 import com.example.calculapp.databinding.ActivityLoginBinding
+import com.example.calculapp.ui.main.MainHomeActivity
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -23,7 +24,16 @@ class LoginActivity : AppCompatActivity() {
 
     //Function to init and configure user interface
     private fun initUi() {
+        initListeners()
+    }
 
+
+    //Function to init click listeners
+    private fun initListeners() {
+        binding.btnLogIn.setOnClickListener {
+            val intent = Intent(this, MainHomeActivity::class.java)
+            startActivity(intent)
+        }
     }
 
 

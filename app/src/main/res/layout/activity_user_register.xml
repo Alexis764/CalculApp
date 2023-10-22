@@ -34,7 +34,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="10dp"
                 android:backgroundTint="@color/accent"
-                android:text="@string/btnLogin"
+                android:text="@string/btnLoginScreen"
                 android:textColor="@color/white"
                 android:textSize="10sp"
                 style="@style/basicText"

@@ -4,12 +4,14 @@
     <string name="logo">Logo image</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
 
+
     <!--LoadActivity-->
     <string name="content_background_girl">Girl image</string>
     <string name="content_security">Security image</string>
     <string name="securityText">100% segura</string>
     <string name="copyrightText">Copyright @ 2023 calculapp todos los derechos reservados</string>
     <string name="secondsText">%xs</string>
+
 
     <!--AboutActivity-->
     <string name="content_aboutImage">About image</string>
@@ -20,6 +22,7 @@
     <string name="secondAppFeature">Paga la deuda</string>
     <string name="thirdAppFeature">Explora ofertas interesantes</string>
     <string name="buttonNext">Siguiente</string>
+
 
     <!--AskCreditFragment-->
     <string name="content_diagonalArrow">Back arrow image</string>
@@ -63,8 +66,9 @@
     <string name="content_imageInfo">Info image</string>
     <string name="negativeNumber">-%s</string>
 
+
     <!--UserRegisterActivity-->
-    <string name="btnLogin">¿Ya eres cliente CalculApp?</string>
+    <string name="btnLoginScreen">¿Ya eres cliente CalculApp?</string>
 
     <string name="amountToRequest">Monto a solicitar</string>
     <string name="payDate">Fecha de pago</string>
@@ -90,5 +94,21 @@
     <string name="checkTerms">Acepto los terminos y condiciones</string>
     <string name="checkProtectionPolicy">Acepto la politica para la proteccion y tratamiento de datos personales</string>
     <string name="btnContinueText">Continuar</string>
+
+
+    <!--LoginActivity-->
+    <string name="logIn">!Inicia sesión</string>
+    <string name="yourAccount">con tu cuenta</string>
+    <string name="content_img_user_profile">User login image</string>
+    <string name="enterEmail">Ingresa tu correo</string>
+    <string name="enterPassword">Ingresa tu contraseña</string>
+    <string name="btnLogIn">Iniciar sesion</string>
+
+
+    <!--Menu-->
+    <string name="home">Inicio</string>
+    <string name="credit">Credito</string>
+    <string name="settings">Configuracion</string>
+
 
 </resources>
