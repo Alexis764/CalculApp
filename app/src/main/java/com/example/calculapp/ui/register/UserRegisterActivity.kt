@@ -3,14 +3,21 @@ package com.example.calculapp.ui.register
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Toast
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
 import com.example.calculapp.R
 import com.example.calculapp.databinding.ActivityUserRegisterBinding
 import com.example.calculapp.domain.credit.CalculateCredit
 import com.example.calculapp.ui.credit.AskCreditFragment.Companion.EXT_AMOUNT_REQUESTED
 import com.example.calculapp.ui.credit.AskCreditFragment.Companion.EXT_DAYS
+import com.example.calculapp.ui.login.LoginActivity
 import com.example.calculapp.ui.registercredit.RegisterCreditActivity
+import com.google.android.material.textfield.MaterialAutoCompleteTextView
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.launch
 import java.text.NumberFormat
 import java.time.format.DateTimeFormatter
 import java.util.Currency
@@ -27,6 +34,9 @@ class UserRegisterActivity : AppCompatActivity() {
     private var valueDays: Int = 0
     private val calculateCredit = CalculateCredit()
 
+    //ViewModel
+    private val userRegisterViewModel by viewModels<UserRegisterViewModel>()
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -40,7 +50,8 @@ class UserRegisterActivity : AppCompatActivity() {
     private fun initUi() {
         initExtras()
         initFormat()
-        setUiData()
+        initUiState()
+        setCreditData()
         initListeners()
     }
 
@@ -60,8 +71,20 @@ class UserRegisterActivity : AppCompatActivity() {
     }
 
 
+    //Function to init document type list
+    private fun initUiState() {
+        lifecycleScope.launch {
+            repeatOnLifecycle(Lifecycle.State.STARTED) {
+                userRegisterViewModel.typeDocumentState.collect {
+                    (binding.tilTypeDocument.editText as? MaterialAutoCompleteTextView)?.setSimpleItems(it)
+                }
+            }
+        }
+    }
+
+
     //Function to load credit data
-    private fun setUiData() {
+    private fun setCreditData() {
         val calculatedCreditModel = calculateCredit.calculateDataCredit(valueMoney, valueDays)
 
         val payDay = if (calculatedCreditModel.daysRequested < 30) {
@@ -85,7 +108,8 @@ class UserRegisterActivity : AppCompatActivity() {
             startRegisterCreditActivity()
         }
         binding.btnLogin.setOnClickListener {
-
+            val intent = Intent(this, LoginActivity::class.java)
+            startActivity(intent)
         }
         binding.btnContinue.setOnClickListener {
             Toast.makeText(this, "prof", Toast.LENGTH_SHORT).show()
