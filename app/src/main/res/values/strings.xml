@@ -111,4 +111,12 @@
     <string name="settings">Configuracion</string>
 
 
+    <!--HomeFragment-->
+    <string name="greeting">Buen dia</string>
+    <string name="content_logoutImage">Logout image</string>
+    <string name="logOut">Salir</string>
+    <string name="totalDebt">Deuda total</string>
+    <string name="debtHistory">Historial de deuda</string>
+
+
 </resources>
