@@ -99,8 +99,8 @@ class UserCreditsDataBase(context: Context): SQLiteOpenHelper(context, "UserCred
     }
 
     //Function to verify user identification number
-    private fun userIdentificationExist(identificationNumber: Int): Boolean {
-        val sql = "SELECT * FROM $USER WHERE $IDENTIFICATION_NUMBER = $identificationNumber"
+    private fun userIdentificationExist(identificationNumber: Long): Boolean {
+        val sql = "SELECT * FROM $USER WHERE $IDENTIFICATION_NUMBER = '$identificationNumber'"
         val db = this.readableDatabase
         val cursor = db.rawQuery(sql, null)
         val identificationExists = cursor.moveToFirst()
@@ -110,7 +110,7 @@ class UserCreditsDataBase(context: Context): SQLiteOpenHelper(context, "UserCred
 
     //Function to verify user email
     private fun userEmailExist(email: String): Boolean {
-        val sql = "SELECT * FROM $USER WHERE $EMAIL = $email"
+        val sql = "SELECT * FROM $USER WHERE $EMAIL = '$email'"
         val db = this.readableDatabase
         val cursor = db.rawQuery(sql, null)
         val emailExist = cursor.moveToFirst()
@@ -132,9 +132,9 @@ class UserCreditsDataBase(context: Context): SQLiteOpenHelper(context, "UserCred
                 val name = cursor.getString(cursor.getColumnIndex(NAME))
                 val lastName = cursor.getString(cursor.getColumnIndex(LASTNAME))
                 val documentType = cursor.getString(cursor.getColumnIndex(DOCUMENT_TYPE))
-                val identificationNumber = cursor.getInt(cursor.getColumnIndex(IDENTIFICATION_NUMBER))
+                val identificationNumber = cursor.getLong(cursor.getColumnIndex(IDENTIFICATION_NUMBER))
                 val email = cursor.getString(cursor.getColumnIndex(EMAIL))
-                val phoneNumber = cursor.getInt(cursor.getColumnIndex(PHONE_NUMBER))
+                val phoneNumber = cursor.getLong(cursor.getColumnIndex(PHONE_NUMBER))
                 val password = cursor.getString(cursor.getColumnIndex(PASSWORD))
 
                 userModel = UserModel(name, lastName, documentType, identificationNumber, email, phoneNumber, password)
@@ -146,6 +146,26 @@ class UserCreditsDataBase(context: Context): SQLiteOpenHelper(context, "UserCred
 
         cursor.close()
         return userModel
+    }
+
+    @SuppressLint("Range")
+    fun userLogin(userEmail: String, userPassword: String): Long? {
+        val sql = "SELECT * FROM $USER WHERE $EMAIL = '$userEmail' AND $PASSWORD = '$userPassword'"
+        val db = this.writableDatabase
+        val cursor = db.rawQuery(sql, null)
+        var userIdentificationNumber: Long
+
+        if (cursor.moveToFirst()) {
+            do {
+                userIdentificationNumber = cursor.getLong(cursor.getColumnIndex(IDENTIFICATION_NUMBER))
+            } while (cursor.moveToNext())
+
+        } else {
+            return null
+        }
+
+        cursor.close()
+        return userIdentificationNumber
     }
 
 

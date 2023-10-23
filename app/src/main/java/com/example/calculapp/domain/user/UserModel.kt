@@ -4,8 +4,8 @@ data class UserModel (
     val name: String,
     val lastName: String,
     val documentType: String,
-    val identificationNumber: Int,
+    val identificationNumber: Long,
     val email: String,
-    val phoneNumber: Int,
+    val phoneNumber: Long,
     val password: String
 )

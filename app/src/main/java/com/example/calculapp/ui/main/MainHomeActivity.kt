@@ -18,6 +18,11 @@ class MainHomeActivity : AppCompatActivity() {
     //Val and var
     private lateinit var navController: NavController
 
+    //Constants
+    companion object {
+        const val USER_IDENTIFICATION_NUMBER = "userIdentificationNumber"
+    }
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

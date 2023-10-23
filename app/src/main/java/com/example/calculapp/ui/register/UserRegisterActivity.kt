@@ -9,11 +9,18 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import com.example.calculapp.R
+import com.example.calculapp.data.sqlite.UserCreditsDataBase
 import com.example.calculapp.databinding.ActivityUserRegisterBinding
 import com.example.calculapp.domain.credit.CalculateCredit
+import com.example.calculapp.domain.user.UserModel
 import com.example.calculapp.ui.credit.AskCreditFragment.Companion.EXT_AMOUNT_REQUESTED
 import com.example.calculapp.ui.credit.AskCreditFragment.Companion.EXT_DAYS
 import com.example.calculapp.ui.login.LoginActivity
+import com.example.calculapp.ui.main.MainHomeActivity
+import com.example.calculapp.ui.main.MainHomeActivity.Companion.USER_IDENTIFICATION_NUMBER
+import com.example.calculapp.ui.register.UserRegisterMessageResponse.ErrorEmail
+import com.example.calculapp.ui.register.UserRegisterMessageResponse.ErrorIdentification
+import com.example.calculapp.ui.register.UserRegisterMessageResponse.Registered
 import com.example.calculapp.ui.registercredit.RegisterCreditActivity
 import com.google.android.material.textfield.MaterialAutoCompleteTextView
 import dagger.hilt.android.AndroidEntryPoint
@@ -36,6 +43,9 @@ class UserRegisterActivity : AppCompatActivity() {
 
     //ViewModel
     private val userRegisterViewModel by viewModels<UserRegisterViewModel>()
+
+    //Database
+    private val userCreditsDataBase = UserCreditsDataBase(this)
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -82,7 +92,9 @@ class UserRegisterActivity : AppCompatActivity() {
                         stringDocumentType[i] = getString(documentInfo.type)
                         i++
                     }
-                    (binding.tilTypeDocument.editText as? MaterialAutoCompleteTextView)?.setSimpleItems(stringDocumentType)
+                    (binding.tilTypeDocument.editText as? MaterialAutoCompleteTextView)?.setSimpleItems(
+                        stringDocumentType
+                    )
                 }
             }
         }
@@ -117,7 +129,7 @@ class UserRegisterActivity : AppCompatActivity() {
             startActivity(intent)
         }
         binding.btnContinue.setOnClickListener {
-            Toast.makeText(this, "prof", Toast.LENGTH_SHORT).show()
+            checkAllFields()
         }
         binding.cbTerms.setOnCheckedChangeListener { _, checkedTerms ->
             setButtonContinueState(checkedTerms, binding.cbProtectionPolicy.isChecked)
@@ -134,6 +146,86 @@ class UserRegisterActivity : AppCompatActivity() {
         intent.putExtra(EXT_DAYS, valueDays)
         startActivity(intent)
         finish()
+    }
+
+    //Function to check all fields required
+    private fun checkAllFields() {
+        val firstName = binding.tietFirstName.text.toString()
+        val lastName = binding.tietLastName.text.toString()
+        val documentType = binding.actvTypeDocument.text.toString()
+        val identificationNumber = binding.tietIdentityNumber.text.toString()
+        val email = binding.tietEmail.text.toString()
+        val repeatEmail = binding.tietRepeatEmail.text.toString()
+        val phoneNumber = binding.tietPhoneNumber.text.toString()
+        val password = binding.tietPassword.text.toString()
+        val repeatPassword = binding.tietRepeatPassword.text.toString()
+
+        if (firstName.trim().isNotEmpty() &&
+            lastName.trim().isNotEmpty() &&
+            documentType.trim().isNotEmpty() &&
+            identificationNumber.trim().isNotEmpty() &&
+            email.trim().isNotEmpty() &&
+            repeatEmail.trim().isNotEmpty() &&
+            phoneNumber.trim().isNotEmpty() &&
+            password.trim().isNotEmpty() &&
+            repeatPassword.trim().isNotEmpty()
+        ) {
+            if (email == repeatEmail && password == repeatPassword) {
+                registerUser(
+                    firstName,
+                    lastName,
+                    documentType,
+                    identificationNumber,
+                    email,
+                    phoneNumber,
+                    password
+                )
+
+            } else {
+                val message =
+                    if (email != repeatEmail) "Correo no coincide" else "Contraseña no coincide"
+                Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
+            }
+
+        } else {
+            Toast.makeText(this, "Debe llenar todos los campos obligatorios", Toast.LENGTH_SHORT)
+                .show()
+        }
+    }
+
+    private fun registerUser(
+        firstName: String,
+        lastName: String,
+        documentType: String,
+        identificationNumber: String,
+        email: String,
+        phoneNumber: String,
+        password: String
+    ) {
+        val name = "$firstName ${binding.tietSecondName.text.toString().trim()}"
+        val lastNameComplete = "$lastName ${binding.tietSecondLastName.text.toString().trim()}"
+        val userModel = UserModel(
+            name,
+            lastNameComplete,
+            documentType,
+            identificationNumber.toLong(),
+            email,
+            phoneNumber.toLong(),
+            password
+        )
+
+        when(userCreditsDataBase.insertUser(userModel)) {
+            ErrorEmail -> Toast.makeText(this, ErrorEmail.message, Toast.LENGTH_SHORT).show()
+            ErrorIdentification -> Toast.makeText(this, ErrorIdentification.message, Toast.LENGTH_SHORT).show()
+            Registered -> {
+                Toast.makeText(this, Registered.message, Toast.LENGTH_SHORT).show()
+                val intent = Intent(this, MainHomeActivity::class.java)
+                intent.putExtra(EXT_AMOUNT_REQUESTED, 250000)
+                intent.putExtra(EXT_DAYS, 10)
+                intent.putExtra(USER_IDENTIFICATION_NUMBER, identificationNumber)
+                startActivity(intent)
+            }
+        }
     }
 
     //Function to set button continue state according to terms checked

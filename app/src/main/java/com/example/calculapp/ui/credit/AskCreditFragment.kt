@@ -9,6 +9,7 @@ import androidx.fragment.app.Fragment
 import com.example.calculapp.R
 import com.example.calculapp.databinding.FragmentAskCreditBinding
 import com.example.calculapp.domain.credit.CalculateCredit
+import com.example.calculapp.ui.main.MainHomeActivity.Companion.USER_IDENTIFICATION_NUMBER
 import com.example.calculapp.ui.register.UserRegisterActivity
 import dagger.hilt.android.AndroidEntryPoint
 import java.text.NumberFormat
@@ -38,6 +39,7 @@ class AskCreditFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initUi()
+        //val prof = activity?.intent?.extras?.getLong(USER_IDENTIFICATION_NUMBER) ?: 0
     }
 
 
