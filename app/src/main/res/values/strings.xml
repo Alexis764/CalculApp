@@ -119,4 +119,8 @@
     <string name="debtHistory">Historial de deuda</string>
 
 
+    <!--DocumentType-->
+    <string name="citizenshipCard">Cedula de ciudadanía</string>
+
+
 </resources>

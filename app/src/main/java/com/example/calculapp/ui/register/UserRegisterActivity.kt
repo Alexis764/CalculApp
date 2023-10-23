@@ -76,7 +76,13 @@ class UserRegisterActivity : AppCompatActivity() {
         lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.STARTED) {
                 userRegisterViewModel.typeDocumentState.collect {
-                    (binding.tilTypeDocument.editText as? MaterialAutoCompleteTextView)?.setSimpleItems(it)
+                    val stringDocumentType = arrayOfNulls<String>(it.size)
+                    var i = 0
+                    it.forEach { documentInfo ->
+                        stringDocumentType[i] = getString(documentInfo.type)
+                        i++
+                    }
+                    (binding.tilTypeDocument.editText as? MaterialAutoCompleteTextView)?.setSimpleItems(stringDocumentType)
                 }
             }
         }
@@ -130,7 +136,6 @@ class UserRegisterActivity : AppCompatActivity() {
         startActivity(intent)
         finish()
     }
-
 
     //Function to set button continue state according to terms checked
     private fun setButtonContinueState(checkedTerms: Boolean, checkedProtection: Boolean) {
