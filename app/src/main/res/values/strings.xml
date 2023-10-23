@@ -123,4 +123,10 @@
     <string name="citizenshipCard">Cedula de ciudadanía</string>
 
 
+    <!--UserRegisterResponse-->
+    <string name="registered">Registro exitoso</string>
+    <string name="errorIdentification">Numero de identificacion ya registrado</string>
+    <string name="errorEmail">Correo electronico ya registrado</string>
+
+
 </resources>

@@ -325,6 +325,7 @@
                     android:layout_height="wrap_content"
                     android:gravity="center"
                     android:inputType="textEmailAddress"
+                    android:maxLength="200"
                     style="@style/basicTextInputEditText"/>
 
             </com.google.android.material.textfield.TextInputLayout>
@@ -341,6 +342,7 @@
                     android:layout_height="wrap_content"
                     android:gravity="center"
                     android:inputType="textEmailAddress"
+                    android:maxLength="200"
                     style="@style/basicTextInputEditText"/>
 
             </com.google.android.material.textfield.TextInputLayout>
@@ -378,6 +380,7 @@
                     android:layout_height="wrap_content"
                     android:gravity="center"
                     android:inputType="textPassword"
+                    android:maxLength="200"
                     style="@style/basicTextInputEditText"/>
 
             </com.google.android.material.textfield.TextInputLayout>
@@ -397,6 +400,7 @@
                     android:layout_height="wrap_content"
                     android:gravity="center"
                     android:inputType="textPassword"
+                    android:maxLength="200"
                     style="@style/basicTextInputEditText"/>
 
             </com.google.android.material.textfield.TextInputLayout>

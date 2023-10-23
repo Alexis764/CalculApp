@@ -7,7 +7,7 @@ import javax.inject.Inject
 class DocumentTypeProvider @Inject constructor() {
     fun getDocumentTypes(): Array<DocumentInfo> {
         return arrayOf(
-            citizenshipCard
+            CitizenshipCard
         )
     }
 }

@@ -101,7 +101,6 @@ class UserRegisterActivity : AppCompatActivity() {
         }
         val dateFormat = DateTimeFormatter.ofPattern("dd/MM/yyyy")
 
-
         binding.tvAmountToRequest.text = moneyFormat.format(calculatedCreditModel.amountRequested)
         binding.tvPayDate.text = payDay.format(dateFormat)
         binding.tvTotalPay.text = moneyFormat.format(calculatedCreditModel.total)
