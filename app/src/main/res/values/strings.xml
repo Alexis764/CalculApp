@@ -129,4 +129,10 @@
     <string name="errorEmail">Correo electronico ya registrado</string>
 
 
+    <!--CreditRegisterResponse-->
+    <string name="creditRegistered">Credito solicitado</string>
+    <string name="requestInProcess">Tienes una solicitud en proceso</string>
+    <string name="currentCredit">Tienes un credito activo</string>
+
+
 </resources>

@@ -9,15 +9,13 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import com.example.calculapp.R
-import com.example.calculapp.data.sqlite.UserCreditsDataBase
 import com.example.calculapp.databinding.ActivityUserRegisterBinding
 import com.example.calculapp.domain.credit.CalculateCredit
-import com.example.calculapp.domain.user.UserModel
+import com.example.calculapp.domain.register.RegisterUseDataBase
 import com.example.calculapp.ui.credit.AskCreditFragment.Companion.EXT_AMOUNT_REQUESTED
 import com.example.calculapp.ui.credit.AskCreditFragment.Companion.EXT_DAYS
 import com.example.calculapp.ui.login.LoginActivity
 import com.example.calculapp.ui.main.MainHomeActivity
-import com.example.calculapp.ui.main.MainHomeActivity.Companion.USER_IDENTIFICATION_NUMBER
 import com.example.calculapp.ui.register.UserRegisterMessageResponse.ErrorEmail
 import com.example.calculapp.ui.register.UserRegisterMessageResponse.ErrorIdentification
 import com.example.calculapp.ui.register.UserRegisterMessageResponse.Registered
@@ -37,6 +35,7 @@ class UserRegisterActivity : AppCompatActivity() {
 
     //Val and var
     private lateinit var moneyFormat: NumberFormat
+    private lateinit var dateFormat: DateTimeFormatter
     private var valueMoney: Int = 0
     private var valueDays: Int = 0
     private val calculateCredit = CalculateCredit()
@@ -45,7 +44,7 @@ class UserRegisterActivity : AppCompatActivity() {
     private val userRegisterViewModel by viewModels<UserRegisterViewModel>()
 
     //Database
-    private val userCreditsDataBase = UserCreditsDataBase(this)
+    private val registerUseDataBase = RegisterUseDataBase(this)
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -78,6 +77,8 @@ class UserRegisterActivity : AppCompatActivity() {
         moneyFormat = NumberFormat.getCurrencyInstance()
         moneyFormat.maximumFractionDigits = 0
         moneyFormat.currency = Currency.getInstance("USD")
+
+        dateFormat = DateTimeFormatter.ofPattern("dd/MM/yyyy")
     }
 
 
@@ -111,7 +112,6 @@ class UserRegisterActivity : AppCompatActivity() {
         } else {
             calculatedCreditModel.creditDate.plusDays(30)
         }
-        val dateFormat = DateTimeFormatter.ofPattern("dd/MM/yyyy")
 
         binding.tvAmountToRequest.text = moneyFormat.format(calculatedCreditModel.amountRequested)
         binding.tvPayDate.text = payDay.format(dateFormat)
@@ -171,15 +171,30 @@ class UserRegisterActivity : AppCompatActivity() {
             repeatPassword.trim().isNotEmpty()
         ) {
             if (email == repeatEmail && password == repeatPassword) {
-                registerUser(
+                when (registerUseDataBase.registerUser(
                     firstName,
+                    binding.tietSecondName.text.toString().trim(),
                     lastName,
+                    binding.tietSecondLastName.text.toString().trim(),
                     documentType,
                     identificationNumber,
                     email,
                     phoneNumber,
                     password
-                )
+                )) {
+                    ErrorEmail -> Toast.makeText(this, ErrorEmail.message, Toast.LENGTH_SHORT).show()
+                    ErrorIdentification -> Toast.makeText(this, ErrorIdentification.message, Toast.LENGTH_SHORT).show()
+                    Registered -> {
+                        Toast.makeText(this, Registered.message, Toast.LENGTH_SHORT).show()
+                        val creditMessage = registerUseDataBase.registerFirstCredit(valueMoney, valueDays, identificationNumber.toLong())
+                        Toast.makeText(this, creditMessage, Toast.LENGTH_SHORT).show()
+                        val intent = Intent(this, MainHomeActivity::class.java)
+                        intent.putExtra(EXT_AMOUNT_REQUESTED, 250000)
+                        intent.putExtra(EXT_DAYS, 10)
+                        intent.putExtra(MainHomeActivity.USER_IDENTIFICATION_NUMBER, identificationNumber)
+                        startActivity(intent)
+                    }
+                }
 
             } else {
                 val message =
@@ -193,40 +208,6 @@ class UserRegisterActivity : AppCompatActivity() {
         }
     }
 
-    private fun registerUser(
-        firstName: String,
-        lastName: String,
-        documentType: String,
-        identificationNumber: String,
-        email: String,
-        phoneNumber: String,
-        password: String
-    ) {
-        val name = "$firstName ${binding.tietSecondName.text.toString().trim()}"
-        val lastNameComplete = "$lastName ${binding.tietSecondLastName.text.toString().trim()}"
-        val userModel = UserModel(
-            name,
-            lastNameComplete,
-            documentType,
-            identificationNumber.toLong(),
-            email,
-            phoneNumber.toLong(),
-            password
-        )
-
-        when(userCreditsDataBase.insertUser(userModel)) {
-            ErrorEmail -> Toast.makeText(this, ErrorEmail.message, Toast.LENGTH_SHORT).show()
-            ErrorIdentification -> Toast.makeText(this, ErrorIdentification.message, Toast.LENGTH_SHORT).show()
-            Registered -> {
-                Toast.makeText(this, Registered.message, Toast.LENGTH_SHORT).show()
-                val intent = Intent(this, MainHomeActivity::class.java)
-                intent.putExtra(EXT_AMOUNT_REQUESTED, 250000)
-                intent.putExtra(EXT_DAYS, 10)
-                intent.putExtra(USER_IDENTIFICATION_NUMBER, identificationNumber)
-                startActivity(intent)
-            }
-        }
-    }
 
     //Function to set button continue state according to terms checked
     private fun setButtonContinueState(checkedTerms: Boolean, checkedProtection: Boolean) {

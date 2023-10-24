@@ -5,11 +5,17 @@ import android.content.ContentValues
 import android.content.Context
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
+import com.example.calculapp.data.sqlite.model.CreditModel
+import com.example.calculapp.domain.credit.CalculateCredit
+import com.example.calculapp.domain.credit.CreditState.*
 import com.example.calculapp.domain.user.UserModel
+import com.example.calculapp.ui.credit.CreditRegisterMessageResponse
+import com.example.calculapp.ui.credit.CreditRegisterMessageResponse.*
 import com.example.calculapp.ui.register.UserRegisterMessageResponse
 import com.example.calculapp.ui.register.UserRegisterMessageResponse.ErrorEmail
 import com.example.calculapp.ui.register.UserRegisterMessageResponse.ErrorIdentification
 import com.example.calculapp.ui.register.UserRegisterMessageResponse.Registered
+import java.time.format.DateTimeFormatter
 
 class UserCreditsDataBase(context: Context): SQLiteOpenHelper(context, "UserCredits", null, 1) {
 
@@ -37,6 +43,9 @@ class UserCreditsDataBase(context: Context): SQLiteOpenHelper(context, "UserCred
         const val TOTAL = "creditTotal"
         const val STATE = "creditState"
     }
+
+    //Val and var
+    private val calculatedCredit = CalculateCredit()
 
 
     //Function to create database tables
@@ -148,6 +157,8 @@ class UserCreditsDataBase(context: Context): SQLiteOpenHelper(context, "UserCred
         return userModel
     }
 
+
+    //Function to user login
     @SuppressLint("Range")
     fun userLogin(userEmail: String, userPassword: String): Long? {
         val sql = "SELECT * FROM $USER WHERE $EMAIL = '$userEmail' AND $PASSWORD = '$userPassword'"
@@ -171,6 +182,94 @@ class UserCreditsDataBase(context: Context): SQLiteOpenHelper(context, "UserCred
 
 
     //FUNCTIONS TO CREDIT TABLE
+    //Function to insert credit for user
+    fun insertCredit(valueMoney: Int, valueDays: Int, userIdentificationNumber: Long): CreditRegisterMessageResponse {
+        val calculatedCreditModel = calculatedCredit.calculateDataCredit(valueMoney, valueDays)
+        val dateFormat = DateTimeFormatter.ofPattern("dd/MM/yyyy")
+        val data = ContentValues()
+
+        data.put(CREDIT_USER_IDENTIFICATION_NUMBER, userIdentificationNumber)
+        data.put(AMOUNT_REQUESTED, calculatedCreditModel.amountRequested)
+        data.put(DAYS_REQUESTED, calculatedCreditModel.daysRequested)
+        data.put(CREDIT_DATE, calculatedCreditModel.creditDate.format(dateFormat))
+        data.put(TOTAL, calculatedCreditModel.total)
+        data.put(STATE, Proceso.toString())
+
+        return when{
+            userCurrentCredit(userIdentificationNumber) -> CurrentCredit
+            userCreditInProcess(userIdentificationNumber) -> RequestInProcess
+            else -> {
+                val db = this.writableDatabase
+                db.insert(CREDIT, null, data)
+                CreditRegistered
+            }
+        }
+    }
+
+    //Function to verify if user has a current credit
+    private fun userCurrentCredit(userIdentificationNumber: Long): Boolean {
+        val creditModelList = allUserCredit(userIdentificationNumber)
+        if (creditModelList != null) {
+            creditModelList.forEach { creditModel ->
+                if (creditModel.state == Actual.toString()) {
+                    return true
+                }
+            }
+
+        } else {
+            return false
+        }
+
+        return false
+    }
+
+    //Function to verify if user has a credit in process
+    private fun userCreditInProcess(userIdentificationNumber: Long): Boolean {
+        val creditModelList = allUserCredit(userIdentificationNumber)
+        if (creditModelList != null) {
+            creditModelList.forEach { creditModel ->
+                if (creditModel.state == Proceso.toString()) {
+                    return true
+                }
+            }
+
+        } else {
+            return false
+        }
+
+        return false
+    }
+
+
+    //Function to search all credits for a user
+    @SuppressLint("Range")
+    fun allUserCredit(userIdentificationNumber: Long): List<CreditModel>? {
+        val sql = "SELECT * FROM $CREDIT WHERE $CREDIT_USER_IDENTIFICATION_NUMBER = $userIdentificationNumber"
+        val db = this.readableDatabase
+        val cursor = db.rawQuery(sql, null)
+        val creditModelList = mutableListOf<CreditModel>()
+
+        if (cursor.moveToFirst()) {
+            do {
+                creditModelList.add(
+                    CreditModel(
+                        id =  cursor.getInt(cursor.getColumnIndex(CREDIT_ID)),
+                        userIdentificationNumber = cursor.getLong(cursor.getColumnIndex(CREDIT_USER_IDENTIFICATION_NUMBER)),
+                        amountRequested = cursor.getInt(cursor.getColumnIndex(AMOUNT_REQUESTED)),
+                        daysRequested = cursor.getInt(cursor.getColumnIndex(DAYS_REQUESTED)),
+                        creditDate = cursor.getString(cursor.getColumnIndex(CREDIT_DATE)),
+                        total = cursor.getInt(cursor.getColumnIndex(TOTAL)),
+                        state = cursor.getString(cursor.getColumnIndex(STATE))
+                    )
+                )
+            } while (cursor.moveToNext())
+        } else {
+            return null
+        }
+
+        cursor.close()
+        return creditModelList
+    }
 
 
 }
