@@ -16,6 +16,7 @@ import com.example.calculapp.ui.credit.AskCreditFragment.Companion.EXT_AMOUNT_RE
 import com.example.calculapp.ui.credit.AskCreditFragment.Companion.EXT_DAYS
 import com.example.calculapp.ui.login.LoginActivity
 import com.example.calculapp.ui.main.MainHomeActivity
+import com.example.calculapp.ui.main.MainHomeActivity.Companion.USER_IDENTIFICATION_NUMBER
 import com.example.calculapp.ui.register.UserRegisterMessageResponse.ErrorEmail
 import com.example.calculapp.ui.register.UserRegisterMessageResponse.ErrorIdentification
 import com.example.calculapp.ui.register.UserRegisterMessageResponse.Registered
@@ -191,7 +192,7 @@ class UserRegisterActivity : AppCompatActivity() {
                         val intent = Intent(this, MainHomeActivity::class.java)
                         intent.putExtra(EXT_AMOUNT_REQUESTED, 250000)
                         intent.putExtra(EXT_DAYS, 10)
-                        intent.putExtra(MainHomeActivity.USER_IDENTIFICATION_NUMBER, identificationNumber)
+                        intent.putExtra(USER_IDENTIFICATION_NUMBER, identificationNumber.toLong())
                         startActivity(intent)
                     }
                 }

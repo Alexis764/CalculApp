@@ -130,7 +130,7 @@ class UserCreditsDataBase(context: Context): SQLiteOpenHelper(context, "UserCred
 
     //Function to search and return user information
     @SuppressLint("Range")
-    fun getUserInformation(userIdentificationNumber: Int): UserModel? {
+    fun getUserInformation(userIdentificationNumber: Long): UserModel? {
         val sql = "SELECT * FROM $USER WHERE $IDENTIFICATION_NUMBER = $userIdentificationNumber"
         val db = this.readableDatabase
         val cursor = db.rawQuery(sql, null)

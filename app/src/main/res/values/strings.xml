@@ -135,4 +135,9 @@
     <string name="currentCredit">Tienes un credito activo</string>
 
 
+    <!--Badges-->
+    <string name="badgeCop">COP</string>
+    <string name="badgeEur">EUR</string>
+
+
 </resources>
