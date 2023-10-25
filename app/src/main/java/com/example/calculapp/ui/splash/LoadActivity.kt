@@ -1,12 +1,18 @@
 package com.example.calculapp.ui.splash
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.CountDownTimer
+import androidx.appcompat.app.AppCompatActivity
 import com.example.calculapp.R
+import com.example.calculapp.data.preference.KeepLogin
 import com.example.calculapp.databinding.ActivityLoadBinding
 import com.example.calculapp.ui.about.AboutActivity
+import com.example.calculapp.ui.credit.AskCreditFragment
+import com.example.calculapp.ui.main.MainHomeActivity
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 class LoadActivity : AppCompatActivity() {
 
@@ -15,6 +21,10 @@ class LoadActivity : AppCompatActivity() {
 
     //Val and var
     private lateinit var countTimerSplash: CountDownTimer
+    private lateinit var intent: Intent
+
+    //Preference
+    private val keepLogin = KeepLogin(this)
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -29,7 +39,26 @@ class LoadActivity : AppCompatActivity() {
 
     //Function to init and configure user interface
     private fun initUi() {
+        initNextScreen()
         initCountTimerSplash()
+    }
+
+
+    //Function to prepare next screen according autologin
+    private fun initNextScreen() {
+        CoroutineScope(Dispatchers.IO).launch {
+            keepLogin.getAutoLogin().collect{ keepLoginModel ->
+                if (keepLoginModel.logging) {
+                    intent = Intent(binding.tvCount.context, MainHomeActivity::class.java)
+                    intent.putExtra(MainHomeActivity.USER_IDENTIFICATION_NUMBER, keepLoginModel.userIdentificationNumber)
+                    intent.putExtra(AskCreditFragment.EXT_AMOUNT_REQUESTED, 250000)
+                    intent.putExtra(AskCreditFragment.EXT_DAYS, 10)
+
+                } else {
+                    intent = Intent(binding.tvCount.context, AboutActivity::class.java)
+                }
+            }
+        }
     }
 
 
@@ -45,7 +74,6 @@ class LoadActivity : AppCompatActivity() {
             }
 
             override fun onFinish() {
-                val intent = Intent(binding.tvCount.context, AboutActivity::class.java)
                 startActivity(intent)
                 finish()
             }

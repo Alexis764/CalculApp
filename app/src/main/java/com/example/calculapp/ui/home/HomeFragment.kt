@@ -54,6 +54,7 @@ class HomeFragment : Fragment(), HomeListeners {
             initRecyclerView()
             initUserInfo()
         }
+        initListeners()
     }
 
 
@@ -101,7 +102,7 @@ class HomeFragment : Fragment(), HomeListeners {
                 creditModelCurrent = creditModel
             }
         }
-        binding.tvTotalDebt.text = if (creditModelCurrent != null) moneyFormat.format(creditModelCurrent!!.total) else "0.0"
+        binding.tvTotalDebt.text = if (creditModelCurrent != null) moneyFormat.format(creditModelCurrent!!.total) else "$0.0"
     }
 
 
@@ -113,6 +114,14 @@ class HomeFragment : Fragment(), HomeListeners {
 
         } else {
             Toast.makeText(requireContext(), "Ha ocurrido un error intentelo mas tarde", Toast.LENGTH_SHORT).show()
+        }
+    }
+
+
+    //Function to init click listeners
+    private fun initListeners() {
+        binding.btnLogout.setOnClickListener {
+            findNavController().navigate(HomeFragmentDirections.actionHomeFragmentToCloseDialogFragment())
         }
     }
 

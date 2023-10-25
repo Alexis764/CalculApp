@@ -13,6 +13,9 @@
         <action
             android:id="@+id/action_homeFragment_to_creditDetailFragment"
             app:destination="@id/creditDetailFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_closeDialogFragment"
+            app:destination="@id/closeDialogFragment" />
     </fragment>
 
     <fragment
@@ -36,4 +39,9 @@
             android:name="creditID"
             app:argType="integer" />
     </dialog>
+    <dialog
+        android:id="@+id/closeDialogFragment"
+        android:name="com.example.calculapp.ui.closeaccount.CloseDialogFragment"
+        android:label="fragment_close_dialog"
+        tools:layout="@layout/fragment_close_dialog" />
 </navigation>

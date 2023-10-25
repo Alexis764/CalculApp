@@ -9,6 +9,7 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import com.example.calculapp.R
+import com.example.calculapp.data.preference.KeepLogin
 import com.example.calculapp.databinding.ActivityUserRegisterBinding
 import com.example.calculapp.domain.credit.CalculateCredit
 import com.example.calculapp.domain.register.RegisterUseDataBase
@@ -23,6 +24,8 @@ import com.example.calculapp.ui.register.UserRegisterMessageResponse.Registered
 import com.example.calculapp.ui.registercredit.RegisterCreditActivity
 import com.google.android.material.textfield.MaterialAutoCompleteTextView
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import java.text.NumberFormat
 import java.time.format.DateTimeFormatter
@@ -46,6 +49,9 @@ class UserRegisterActivity : AppCompatActivity() {
 
     //Database
     private val registerUseDataBase = RegisterUseDataBase(this)
+
+    //Datastore
+    private val keepLogin = KeepLogin(this)
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -127,7 +133,10 @@ class UserRegisterActivity : AppCompatActivity() {
         }
         binding.btnLogin.setOnClickListener {
             val intent = Intent(this, LoginActivity::class.java)
+            intent.putExtra(EXT_AMOUNT_REQUESTED, valueMoney)
+            intent.putExtra(EXT_DAYS, valueDays)
             startActivity(intent)
+            finish()
         }
         binding.btnContinue.setOnClickListener {
             checkAllFields()
@@ -186,14 +195,22 @@ class UserRegisterActivity : AppCompatActivity() {
                     ErrorEmail -> Toast.makeText(this, ErrorEmail.message, Toast.LENGTH_SHORT).show()
                     ErrorIdentification -> Toast.makeText(this, ErrorIdentification.message, Toast.LENGTH_SHORT).show()
                     Registered -> {
+
+                        CoroutineScope(Dispatchers.IO).launch {
+                            keepLogin.saveUserIdentificationNumber(identificationNumber.toLong())
+                            keepLogin.saveAutoLogin(true)
+                        }
+
                         Toast.makeText(this, Registered.message, Toast.LENGTH_SHORT).show()
                         val creditMessage = registerUseDataBase.registerFirstCredit(valueMoney, valueDays, identificationNumber.toLong())
                         Toast.makeText(this, creditMessage, Toast.LENGTH_SHORT).show()
+
                         val intent = Intent(this, MainHomeActivity::class.java)
                         intent.putExtra(EXT_AMOUNT_REQUESTED, 250000)
                         intent.putExtra(EXT_DAYS, 10)
                         intent.putExtra(USER_IDENTIFICATION_NUMBER, identificationNumber.toLong())
                         startActivity(intent)
+                        finish()
                     }
                 }
 

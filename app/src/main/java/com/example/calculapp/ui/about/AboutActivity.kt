@@ -16,9 +16,7 @@ class AboutActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityAboutBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
         initUi()
-
     }
 
 
@@ -34,6 +32,7 @@ class AboutActivity : AppCompatActivity() {
         binding.btnNext.setOnClickListener {
             val intent = Intent(this, RegisterCreditActivity::class.java)
             startActivity(intent)
+            finish()
         }
     }
 

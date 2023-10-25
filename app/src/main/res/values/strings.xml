@@ -158,4 +158,10 @@
     <string name="daysString">%d Días</string>
 
 
+    <!--DialogCloseSession-->
+    <string name="questionCloseSession">¿Desea cerrar su sesion?</string>
+    <string name="buttonLeave">Salir</string>
+    <string name="buttonCancelTheLeave">Cancelar</string>
+
+
 </resources>
