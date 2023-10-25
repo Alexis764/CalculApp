@@ -272,4 +272,78 @@ class UserCreditsDataBase(context: Context): SQLiteOpenHelper(context, "UserCred
     }
 
 
+    //Function to search and return a credit for his id
+    @SuppressLint("Range")
+    fun getCreditID(id: Int): CreditModel? {
+        val sql = "SELECT * FROM $CREDIT WHERE $CREDIT_ID = $id"
+        val db = this.readableDatabase
+        val cursor = db.rawQuery(sql, null)
+        var creditModel: CreditModel
+
+        if (cursor.moveToFirst()) {
+            do {
+                creditModel = CreditModel(
+                    id = cursor.getInt(cursor.getColumnIndex(CREDIT_ID)),
+                    userIdentificationNumber = cursor.getLong(cursor.getColumnIndex(CREDIT_USER_IDENTIFICATION_NUMBER)),
+                    amountRequested = cursor.getInt(cursor.getColumnIndex(AMOUNT_REQUESTED)),
+                    daysRequested = cursor.getInt(cursor.getColumnIndex(DAYS_REQUESTED)),
+                    creditDate = cursor.getString(cursor.getColumnIndex(CREDIT_DATE)),
+                    total = cursor.getInt(cursor.getColumnIndex(TOTAL)),
+                    state = cursor.getString(cursor.getColumnIndex(STATE))
+                )
+            } while (cursor.moveToNext())
+
+        } else {
+            return null
+        }
+
+        cursor.close()
+        return creditModel
+    }
+
+
+    //Function to delete a credit
+    fun deleteCredit(id: Int): Int {
+        val arrayData = arrayOf(id.toString())
+        val db = this.writableDatabase
+        return db.delete(CREDIT, "$CREDIT_ID = ?", arrayData)
+    }
+
+
+    //Function to update a credit
+    fun updateStateCredit(creditModel: CreditModel): Int {
+        val dataUpdated = ContentValues()
+        dataUpdated.put(STATE, creditModel.state)
+
+        val whereData = arrayOf(creditModel.id.toString())
+
+        val db = this.writableDatabase
+        return db.update(CREDIT, dataUpdated, "$CREDIT_ID = ?", whereData)
+    }
+
+
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

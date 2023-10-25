@@ -116,7 +116,7 @@
     <string name="content_logoutImage">Logout image</string>
     <string name="logOut">Salir</string>
     <string name="totalDebt">Deuda total</string>
-    <string name="debtHistory">Historial de deuda</string>
+    <string name="debtHistory">Historial de deudas</string>
 
 
     <!--DocumentType-->
@@ -138,6 +138,24 @@
     <!--Badges-->
     <string name="badgeCop">COP</string>
     <string name="badgeEur">EUR</string>
+
+
+    <!--DetailCredit-->
+    <string name="content_CloseImage">Close button</string>
+    <string name="detailRequestedAmount">Monto solicitado:</string>
+    <string name="detailCreditTime">Tiempo de credito:</string>
+    <string name="detailApplicationDate">Fecha de solicitud:</string>
+    <string name="detailInterest">Intereses:</string>
+    <string name="detailEndorsement">Aval:</string>
+    <string name="detailEndorsementDiscount">Descuento de aval:</string>
+    <string name="detailElectronicSignature">Firma electronica:</string>
+    <string name="detailDiscount">Descuento:</string>
+    <string name="detailTotalPay">Total a pagar:</string>
+    <string name="detailButtonPay">Pagar el credito</string>
+    <string name="detailButtonAccept">Aceptar</string>
+    <string name="detailButtonCancel">Cancelar</string>
+
+    <string name="daysString">%d Días</string>
 
 
 </resources>

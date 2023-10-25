@@ -7,5 +7,5 @@ data class CreditModel (
     val daysRequested: Int,
     val creditDate: String,
     val total: Int,
-    val state: String
+    var state: String
 )

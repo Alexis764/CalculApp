@@ -1,0 +1,235 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:paddingHorizontal="24dp"
+    android:paddingVertical="16dp"
+    android:background="@drawable/shape_detail_credit"
+    tools:context=".ui.creditdetail.CreditDetailFragment">
+
+    <ImageView
+        android:id="@+id/btnClose"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:src="@drawable/ic_close"
+        android:contentDescription="@string/content_CloseImage"/>
+
+    <LinearLayout
+        android:id="@+id/llCreditData"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/btnClose"
+        android:orientation="vertical"
+        android:layout_marginEnd="80dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/detailRequestedAmount"
+            android:textStyle="bold"
+            style="@style/basicText"/>
+
+        <TextView
+            android:id="@+id/tvAmountRequested"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:layout_marginBottom="16dp"
+            tools:text="@string/detailRequestedAmount"
+            android:textColor="@color/primaryDark"
+            style="@style/basicText"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/detailCreditTime"
+            android:textStyle="bold"
+            style="@style/basicText"/>
+
+        <TextView
+            android:id="@+id/tvCreditTime"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:layout_marginBottom="16dp"
+            tools:text="@string/detailRequestedAmount"
+            android:textColor="@color/primaryDark"
+            style="@style/basicText"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/detailApplicationDate"
+            android:textStyle="bold"
+            style="@style/basicText"/>
+
+        <TextView
+            android:id="@+id/tvApplicationDate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:layout_marginBottom="16dp"
+            tools:text="@string/detailRequestedAmount"
+            android:textColor="@color/primaryDark"
+            style="@style/basicText"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/detailInterest"
+            android:textStyle="bold"
+            style="@style/basicText"/>
+
+        <TextView
+            android:id="@+id/tvInterest"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:layout_marginBottom="16dp"
+            tools:text="@string/detailRequestedAmount"
+            android:textColor="@color/primaryDark"
+            style="@style/basicText"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/detailEndorsement"
+            android:textStyle="bold"
+            style="@style/basicText"/>
+
+        <TextView
+            android:id="@+id/tvEndorsement"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:layout_marginBottom="16dp"
+            tools:text="@string/detailRequestedAmount"
+            android:textColor="@color/primaryDark"
+            style="@style/basicText"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/detailEndorsementDiscount"
+            android:textStyle="bold"
+            style="@style/basicText"/>
+
+        <TextView
+            android:id="@+id/tvEndorsementDiscount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:layout_marginBottom="16dp"
+            tools:text="@string/detailRequestedAmount"
+            android:textColor="@color/primaryDark"
+            style="@style/basicText"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/detailElectronicSignature"
+            android:textStyle="bold"
+            style="@style/basicText"/>
+
+        <TextView
+            android:id="@+id/tvElectronicSignature"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:layout_marginBottom="16dp"
+            tools:text="@string/detailRequestedAmount"
+            android:textColor="@color/primaryDark"
+            style="@style/basicText"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/detailDiscount"
+            android:textStyle="bold"
+            style="@style/basicText"/>
+
+        <TextView
+            android:id="@+id/tvDiscount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:layout_marginBottom="16dp"
+            tools:text="@string/detailRequestedAmount"
+            android:textColor="@color/primaryDark"
+            style="@style/basicText"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/detailTotalPay"
+            android:textStyle="bold"
+            style="@style/basicText"/>
+
+        <TextView
+            android:id="@+id/tvTotalPay"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:layout_marginBottom="16dp"
+            tools:text="@string/detailRequestedAmount"
+            android:textColor="@color/primaryDark"
+            style="@style/basicText"/>
+
+    </LinearLayout>
+
+
+    <Button
+        android:id="@+id/btnPayTheCredit"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/llCreditData"
+        android:text="@string/detailButtonPay"
+        android:backgroundTint="@color/accent"
+        android:textColor="@color/white"
+        android:visibility="gone"
+        style="@style/basicText"/>
+
+
+    <LinearLayout
+        android:id="@+id/llButtons"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/llCreditData"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:visibility="gone">
+
+        <Button
+            android:id="@+id/btnAcceptCredit"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_marginEnd="8dp"
+            android:text="@string/detailButtonAccept"
+            android:backgroundTint="@color/accent"
+            android:textColor="@color/white"
+            style="@style/basicText"/>
+
+        <Button
+            android:id="@+id/btnCancelCredit"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/detailButtonCancel"
+            android:backgroundTint="@color/secondary"
+            android:textColor="@color/white"
+            style="@style/basicText"/>
+
+    </LinearLayout>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

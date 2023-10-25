@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.calculapp.R
 import com.example.calculapp.data.sqlite.UserCreditsDataBase
@@ -84,11 +85,10 @@ class HomeFragment : Fragment(), HomeListeners {
             val homeAdapter = HomeAdapter(creditModelList!!, this)
             binding.rvDebtHistory.adapter = homeAdapter
 
-            currentDebt()
-
         } else {
-            Toast.makeText(requireContext(), "Ha ocurrido un error con los creditos intentelo mas tarde", Toast.LENGTH_SHORT).show()
+            Toast.makeText(requireContext(), "No hay creditos", Toast.LENGTH_SHORT).show()
         }
+        currentDebt()
     }
 
     //Function to set current debt
@@ -101,7 +101,7 @@ class HomeFragment : Fragment(), HomeListeners {
                 creditModelCurrent = creditModel
             }
         }
-        binding.tvTotalDebt.text = if (creditModelCurrent != null) creditModelCurrent!!.total.toString() else "0.0"
+        binding.tvTotalDebt.text = if (creditModelCurrent != null) moneyFormat.format(creditModelCurrent!!.total) else "0.0"
     }
 
 
@@ -119,7 +119,7 @@ class HomeFragment : Fragment(), HomeListeners {
 
     //Function lambda to click on the item detail button
     override fun onButtonDetailCLick(creditModel: CreditModel) {
-
+        findNavController().navigate(HomeFragmentDirections.actionHomeFragmentToCreditDetailFragment(creditModel.id))
     }
 
 

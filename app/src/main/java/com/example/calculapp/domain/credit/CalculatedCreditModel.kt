@@ -5,7 +5,7 @@ import java.time.LocalDate
 data class CalculatedCreditModel (
     val amountRequested: Int,
     val daysRequested: Int,
-    val creditDate: LocalDate,
+    var creditDate: LocalDate,
     val interest: Int,
     val endorsement: Int,
     val endorsementDiscount: Int,
