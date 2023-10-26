@@ -5,16 +5,22 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.example.calculapp.R
+import com.example.calculapp.data.preference.KeepLogin
+import com.example.calculapp.data.preference.model.KeepLoginModel
+import com.example.calculapp.data.sqlite.UserCreditsDataBase
 import com.example.calculapp.databinding.FragmentAskCreditBinding
 import com.example.calculapp.domain.credit.CalculateCredit
 import com.example.calculapp.ui.register.UserRegisterActivity
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import java.text.NumberFormat
 import java.util.Currency
 
-@Suppress("DEPRECATION")
 @AndroidEntryPoint
 class AskCreditFragment : Fragment() {
 
@@ -25,6 +31,13 @@ class AskCreditFragment : Fragment() {
     //Val and var
     private lateinit var moneyFormat: NumberFormat
     private val calculateCredit = CalculateCredit()
+    private lateinit var keepLoginModel: KeepLoginModel
+
+    //Database
+    private lateinit var userCreditsDataBase: UserCreditsDataBase
+    private lateinit var keepLogin: KeepLogin
+
+    //Datastore
 
     //Constants
     companion object {
@@ -38,16 +51,29 @@ class AskCreditFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initUi()
-        //val prof = activity?.intent?.extras?.getLong(USER_IDENTIFICATION_NUMBER) ?: 0
     }
 
 
     //Function to init and configure user interface
     private fun initUi() {
+        initLocalStorage()
         initFormats()
         initListeners()
         setFirstValues()
         setTooltipsText()
+    }
+
+
+    //Function to init database and preferences settings
+    private fun initLocalStorage() {
+        userCreditsDataBase = UserCreditsDataBase(requireContext())
+        keepLogin = KeepLogin(requireContext())
+
+        CoroutineScope(Dispatchers.IO).launch {
+            keepLogin.getAutoLogin().collect { keepLoginModelData ->
+                keepLoginModel = keepLoginModelData
+            }
+        }
     }
 
 
@@ -72,10 +98,17 @@ class AskCreditFragment : Fragment() {
             setStepSizeDaysSlider(valueDays)
         }
         binding.btnRequestsCredit.setOnClickListener {
-            startUserRegisterActivity()
-        }
-        binding.btnBack.setOnClickListener {
-            activity?.onBackPressed()
+            if (keepLoginModel.logging) {
+                val messageResponse = userCreditsDataBase.insertCredit(
+                    binding.quantitySlider.value.toInt(),
+                    binding.daysSlider.value.toInt(),
+                    keepLoginModel.userIdentificationNumber
+                    )
+
+                Toast.makeText(requireContext(), messageResponse.message, Toast.LENGTH_SHORT).show()
+            } else {
+                startUserRegisterActivity()
+            }
         }
     }
 
@@ -87,7 +120,10 @@ class AskCreditFragment : Fragment() {
         binding.tvRequestedAmount.text = moneyFormat.format(calculatedCreditModel.amountRequested)
         binding.tvInterest.text = moneyFormat.format(calculatedCreditModel.interest)
         binding.tvGuarantee.text = moneyFormat.format(calculatedCreditModel.endorsement)
-        binding.tvGuaranteeDiscount.text = getString(R.string.negativeNumber, moneyFormat.format(calculatedCreditModel.endorsementDiscount))
+        binding.tvGuaranteeDiscount.text = getString(
+            R.string.negativeNumber,
+            moneyFormat.format(calculatedCreditModel.endorsementDiscount)
+        )
         binding.tvElectronicSignature.text = moneyFormat.format(calculatedCreditModel.electronicSignature)
         binding.tvDiscount.text = getString(R.string.negativeNumber, moneyFormat.format(calculatedCreditModel.discount))
         binding.tvTotal.text = moneyFormat.format(calculatedCreditModel.total)
@@ -119,11 +155,14 @@ class AskCreditFragment : Fragment() {
 
     //Function to init sliders first values
     private fun setFirstValues() {
-        val firstMoneyValue = activity?.intent?.extras?.getInt(EXT_AMOUNT_REQUESTED)?.toFloat() ?: 250000f
+        val firstMoneyValue =
+            activity?.intent?.extras?.getInt(EXT_AMOUNT_REQUESTED)?.toFloat() ?: 250000f
         binding.quantitySlider.value = firstMoneyValue
 
         val firstDayValue = activity?.intent?.extras?.getInt(EXT_DAYS)?.toFloat() ?: 10f
-        if (firstMoneyValue > 30) {setStepSizeDaysSlider(firstDayValue)}
+        if (firstMoneyValue > 30) {
+            setStepSizeDaysSlider(firstDayValue)
+        }
         binding.daysSlider.value = firstDayValue
     }
 
