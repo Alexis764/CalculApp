@@ -138,6 +138,8 @@
     <!--Badges-->
     <string name="badgeCop">COP</string>
     <string name="badgeEur">EUR</string>
+    <string name="badgeMxm">MXN</string>
+    <string name="badgeUsd">USD</string>
 
 
     <!--DetailCredit-->
@@ -162,6 +164,16 @@
     <string name="questionCloseSession">¿Desea cerrar su sesion?</string>
     <string name="buttonLeave">Salir</string>
     <string name="buttonCancelTheLeave">Cancelar</string>
+
+
+    <!--SettingsFragment-->
+    <string name="calculator">Calculadora</string>
+    <string name="differentCurrencies">Diferentes divisas</string>
+
+    <string name="stringEuro">Euro</string>
+
+    <string name="badge">Divisa</string>
+    <string name="selectCurrency">Selecciona tu divisa</string>
 
 
 </resources>
