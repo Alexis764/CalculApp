@@ -10,14 +10,31 @@
     android:background="@drawable/shape_detail_credit"
     tools:context=".ui.creditdetail.CreditDetailFragment">
 
-    <ImageView
-        android:id="@+id/btnClose"
-        android:layout_width="30dp"
-        android:layout_height="30dp"
+    <LinearLayout
+        android:id="@+id/llButtonOptions"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        android:src="@drawable/ic_close"
-        android:contentDescription="@string/content_CloseImage"/>
+        android:orientation="vertical">
+
+        <ImageView
+            android:id="@+id/btnClose"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginBottom="12dp"
+            android:src="@drawable/ic_close"
+            android:contentDescription="@string/content_CloseImage"/>
+
+        <ImageView
+            android:id="@+id/btnDownload"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:src="@drawable/ic_download"
+            android:visibility="gone"
+            android:contentDescription="@string/content_DownloadImage"/>
+
+    </LinearLayout>
 
     <LinearLayout
         android:id="@+id/llCreditData"
@@ -25,7 +42,7 @@
         android:layout_height="wrap_content"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toStartOf="@id/btnClose"
+        app:layout_constraintEnd_toStartOf="@id/llButtonOptions"
         android:orientation="vertical"
         android:layout_marginEnd="80dp">
 
@@ -81,11 +98,11 @@
             style="@style/basicText"/>
 
         <TextView
+            style="@style/basicText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/detailInterest"
-            android:textStyle="bold"
-            style="@style/basicText"/>
+            android:textStyle="bold" />
 
         <TextView
             android:id="@+id/tvInterest"

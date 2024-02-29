@@ -144,6 +144,7 @@
 
     <!--DetailCredit-->
     <string name="content_CloseImage">Close button</string>
+    <string name="content_DownloadImage">Download button</string>
     <string name="detailRequestedAmount">Monto solicitado:</string>
     <string name="detailCreditTime">Tiempo de credito:</string>
     <string name="detailApplicationDate">Fecha de solicitud:</string>

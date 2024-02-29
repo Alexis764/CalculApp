@@ -37,7 +37,7 @@ class SettingsFragment : Fragment() {
     }
 
     //Val and var
-    private lateinit var badgesModel: BadgesModel
+    private var badgesModel: BadgesModel? = null
 
 
     //Function when the view is created
@@ -50,7 +50,6 @@ class SettingsFragment : Fragment() {
 
     //Function to init and configure user interface
     private fun initUi() {
-        initBadgeOptions()
         initListeners()
         initUiState()
     }
@@ -80,11 +79,11 @@ class SettingsFragment : Fragment() {
     private fun calculateMoneyConverter() {
         val moneyEur = binding.tiedEUR.text.toString()
 
-        if (moneyEur.isNotEmpty()) {
+        if (moneyEur.isNotEmpty() && badgesModel != null) {
             val moneyConverter = when (binding.actvSelectCurrency.text.toString()) {
-                getString(R.string.badgeCop) -> (moneyEur.toLong() * badgesModel.cop)
-                getString(R.string.badgeUsd) -> (moneyEur.toLong() * badgesModel.usd)
-                getString(R.string.badgeMxm) -> (moneyEur.toLong() * badgesModel.mxn)
+                getString(R.string.badgeCop) -> (moneyEur.toLong() * badgesModel!!.cop)
+                getString(R.string.badgeUsd) -> (moneyEur.toLong() * badgesModel!!.usd)
+                getString(R.string.badgeMxm) -> (moneyEur.toLong() * badgesModel!!.mxn)
                 else -> { 1.0 }
             }
 
@@ -126,6 +125,7 @@ class SettingsFragment : Fragment() {
         binding.progress.visibility = View.GONE
         binding.llCalculator.visibility = View.VISIBLE
         badgesModel = settingsState.badgeModel.badges
+        initBadgeOptions()
     }
 
 
