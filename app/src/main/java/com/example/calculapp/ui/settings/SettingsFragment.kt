@@ -30,12 +30,6 @@ class SettingsFragment : Fragment() {
     //ViewModel
     private val settingsViewModel by viewModels<SettingsViewModel>()
 
-    //Constants
-    companion object {
-        //Retrofit API BADGES
-        const val API_KEY = "3b6037a9f522ffb9a235667946e89e5a"
-    }
-
     //Val and var
     private var badgesModel: BadgesModel? = null
 
@@ -44,7 +38,8 @@ class SettingsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initUi()
-        settingsViewModel.getBadge(API_KEY, "USD,COP,MXN")
+        val apiKey = requireContext().getString(R.string.api_key)
+        settingsViewModel.getBadge(apiKey, "USD,COP,MXN")
     }
 
 
